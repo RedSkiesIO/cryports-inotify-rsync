@@ -1,5 +1,5 @@
 [Unit]
-Description = cryportSyncService
+Description = cryport file sync service
 After = network.target
 
 [Service]
@@ -8,8 +8,8 @@ User = gitlab-runner
 Group = gitlab-runnner
 WorkingDirectory = /opt/cryportsyncservice
 ExecStartPre = /bin/mkdir /run/cryportsyncservice
-ExecStartPre = /bin/chown -R root:root /run/cryportsyncservice
-ExecStart = /bin/bash /opt/cryportsyncservice/cryports-rsync.sh
+ExecStartPre = /bin/chown -R gitlab-runner:gitlab-runner /run/cryportsyncservice
+ExecStart = /bin/bash /opt/cryportsyncservice/cryport-rsync.sh
 ExecReload = /bin/kill -s HUP $MAINPID
 ExecStop = /bin/kill -s TERM $MAINPID
 ExecStopPost = /bin/rm -rf /run/cryportsyncservice
