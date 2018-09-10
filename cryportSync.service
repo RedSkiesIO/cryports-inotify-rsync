@@ -1,0 +1,19 @@
+[Unit]
+Description = cryportSyncService
+After = network.target
+
+[Service]
+PIDFile = /run/cryportsyncservice/cryportsyncservice.pid
+User = root
+Group = root
+WorkingDirectory = /opt/cryportsyncservice
+ExecStartPre = /bin/mkdir /run/cryportsyncservice
+ExecStartPre = /bin/chown -R root:root /run/cryportsyncservice
+ExecStart = /bin/bash /opt/cryportsyncservice/cryports-rsync.sh
+ExecReload = /bin/kill -s HUP $MAINPID
+ExecStop = /bin/kill -s TERM $MAINPID
+ExecStopPost = /bin/rm -rf /run/cryportsyncservice
+PrivateTmp = true
+
+[Install]
+WantedBy = multi-user.target
