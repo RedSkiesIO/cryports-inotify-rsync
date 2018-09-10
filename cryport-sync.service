@@ -6,14 +6,12 @@ After = network.target
 PIDFile = /home/gitlab-runner/.tmp/cryportsyncservice/cryportsyncservice.pid
 User = gitlab-runner
 Group = gitlab-runnner
-WorkingDirectory = /home/gitlab-runner/t/cryportsyncservice
-ExecStartPre = /bin/mkdir -p /home/gitlab-runner/.tmp/cryportsyncservice
-ExecStartPre = /bin/chown -R gitlab-runner:gitlab-runner /home/gitlab-runner/.tmp/cryportsyncservice
-ExecStart = /bin/bash /home/gitlab-runner/cryports-inotify-rsync/cryport-rsync.sh
+WorkingDirectory = /home/gitlab-runner/.tmp/cryportsyncservice/cryportsyncservice
+ExecStart = /bin/bash /home/gitlab-runner/.tmp/cryportsyncservice/cryport-rsync.sh
 ExecReload = /bin/kill -s HUP $MAINPID
 ExecStop = /bin/kill -s TERM $MAINPID
-ExecStopPost = /bin/rm -rf /home/gitlab-runner/.tmp/cryportsyncservice
+ExecStopPost = /bin/rm -rf /home/gitlab-runner/.tmp/cryportsyncservice/
 PrivateTmp = true
 
 [Install]
-WantedBy = multi-user.target
+WantedBy = default.target
