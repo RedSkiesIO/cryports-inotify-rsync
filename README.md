@@ -10,8 +10,8 @@ This script runs as a service on the gitlab server it uses inotify to see when n
     
 2) make the cryport-rsync.sh file executable
 
-    $ cd cryports-inotify-rsync
-    $ chmod u+x cryport-rsync.sh
+    $ cp cryport-rsync.s /usr/local/bin/cryport-rsync
+    $ chmod u+x /usr/local/bin/cryport-rsync 
 
 2) install inotify deps with 
 
@@ -19,9 +19,9 @@ This script runs as a service on the gitlab server it uses inotify to see when n
 
 3) copy the cryportSync.service to /etc/systemd/system/
 
-    $ cp cryport-sync.service /etc/systemd/system/
+    $ cp cryport-sync.service /lib/systemd/system/
 
 4) reload systemd and start the service
 
     $ systemctl daemonm-reload
-    $ systemctl status cryport-sync.service
+    $ systemctl start cryport-sync.service
