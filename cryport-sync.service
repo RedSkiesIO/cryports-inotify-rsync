@@ -3,15 +3,15 @@ Description = cryport file sync service
 After = network.target
 
 [Service]
-PIDFile = /home/gitlab-runner/.tmp/cryportsyncservice/cryportsyncservice.pid
-User = gitlab-runner
-Group = gitlab-runnner
-WorkingDirectory = /home/gitlab-runner/.tmp/cryportsyncservice/cryportsyncservice
-ExecStart = /bin/bash /home/gitlab-runner/.tmp/cryportsyncservice/cryport-rsync.sh
+User=gitlab-runner
+Group=gitlab-runner
+WorkingDirectory = ${HOME}/.tmp
+PIDFile = ${HOME}/.tmp/cryport-sync/service.pid
+ExecStart = /bin/bash /usr/local/bin/cryport-rsync
 ExecReload = /bin/kill -s HUP $MAINPID
 ExecStop = /bin/kill -s TERM $MAINPID
-ExecStopPost = /bin/rm -rf /home/gitlab-runner/.tmp/cryportsyncservice/
+ExecStopPost = /bin/rm -rf ${HOME}/.tmp/cryport-sync/
 PrivateTmp = true
 
 [Install]
-WantedBy = default.target
+WantedBy = multi-user.target
