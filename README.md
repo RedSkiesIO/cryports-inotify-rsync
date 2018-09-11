@@ -17,7 +17,7 @@ This script runs as a service on the gitlab server it uses inotify to see when n
 
     $ apt-get install inotify-tools -y
 
-3) copy the cryportSync.service to /etc/systemd/system/
+3) copy the cryport-sync.service to /etc/systemd/system/
 
     $ cp cryport-sync.service /lib/systemd/system/
 
